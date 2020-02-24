@@ -63,7 +63,7 @@ class auth extends CI_Controller{
 
     public function registration(){
         $this->form_validation->set_rules('nik', 'NIK', 'trim|required'); 
-        $this->form_validation->set_rules('nama', 'Nama', 'trim|required'); 
+        $this->form_validation->set_rules('nama', 'Nama', 'required'); 
         $this->form_validation->set_rules('username', 'Username', 'trim|required|is_unique[masyarakat.username]',['is_unique' => 'This username has already registered']);
         $this->form_validation->set_rules('password1', 'Password', 'trim|required|min_length[3]|matches[password2]',[
             'matches' => 'Password doesnt match',

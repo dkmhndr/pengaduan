@@ -59,8 +59,9 @@ class Bidang extends CI_Controller{
     public function delete($id=null){
         if(!isset($id)) show_404();
         if($this->bidang_crud->delete($id)){
-            redirect(site_url('kamera'));
+            redirect(site_url('bidang'));
         }
+        
     }
 }
 ?>
