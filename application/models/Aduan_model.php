@@ -4,6 +4,7 @@ class Aduan_model extends CI_Model{
     private $pengaduan = "pengaduan";
     private $tabletanggapan = "tanggapan";
 
+    public $id_pengaduan;
     public $id_bidang;
     public $tgl_pengaduan;
     public $nik;
@@ -29,11 +30,7 @@ class Aduan_model extends CI_Model{
             ['field' => 'isi_laporan',
             'label' => 'isi_laporan',
             'rules' => 'required'],
-            
-            ['field' => 'foto',
-            'label' => 'foto',
-            'rules' => 'required'],
-            
+
             ['field' => 'status',
             'label' => 'status',
             'rules' => 'required']
@@ -92,15 +89,33 @@ class Aduan_model extends CI_Model{
    
    public function save(){
        $post = $this->input->post();
+       $this->id_pengaduan ="";
        $this->id_bidang = $post["id_bidang"];
        $this->tgl_pengaduan = $post["tgl_pengaduan"];
        $this->nik = $post["nik"];
        $this->isi_laporan = $post["isi_laporan"];
-       $this->foto = $post["foto"];
+       $this->foto = $this->_uploadImage();
        $this->status = "Menunggu Tanggapan";
        $this->db->insert($this->pengaduan, $this);   
    }
 
+    private function _uploadImage(){
+    $config['upload_path'] = './upload/pengaduan/';
+    $config['allowed_types'] = 'gif|jpg|png';
+    $config['file_name'] = $this->id_pengaduan;
+    $config['overwrite'] = true;
+    $config['max_size'] = 4096; // 1MB
+    // $config['max_width'] = 1024;
+    // $config['max_height'] = 768;
+
+    $this->load->library('upload', $config);
+
+    if ($this->upload->do_upload('foto')) {
+    return $this->upload->data("file_name");
+    }
+
+    return "default.jpg";
+    }
 }
 
 ?>

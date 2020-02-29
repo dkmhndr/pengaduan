@@ -32,7 +32,7 @@
 						<td><?= $daftar->nama_bidang; ?></td>
 						<td><?= $daftar->nama; ?></td>
 						<td><?= $daftar->isi_laporan; ?></td>
-						<td><?= $daftar->foto; ?></td>
+						<td><img src="<?php echo base_url('upload/pengaduan/'.$daftar->foto) ?>" width="64" /></td>
 						<td><?= $daftar->tgl_pengaduan; ?></td>
 						<td><?= $daftar->status; ?></td>
 						<?php if(isset($nik)){ ?>

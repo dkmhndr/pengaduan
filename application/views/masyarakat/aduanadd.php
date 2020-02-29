@@ -24,7 +24,14 @@
 				<label for="isi_laporan">Isi laporan*</label>
 				<input type="textbox" name="isi_laporan" id="isi_laporan" required class="form-control" />
 			</div>
-			<input type="hidden" name="foto" id="foto" value="No Image">
+			<div class="form-group">
+				<label for="foto">Foto</label>
+				<input class="form-control-file" type="file"
+					name="foto" />
+				<div class="invalid-feedback">
+					<?php echo form_error('foto') ?>
+				</div>
+			</div>
 			<input type="hidden" name="status" id="status" value="Menunggu Tanggapan">
 			<input type="submit" value="Laporkan" class="btn btn-success" name="btn" />
 		</form>
