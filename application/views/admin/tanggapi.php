@@ -15,7 +15,7 @@
     <input type="hidden" name="tgl_tanggapan" value="<?php echo date('Y-m-d') ?>">
     <input type="hidden" name="id_petugas" value="<?php echo $user['id_petugas'] ?>">
 <label for="tanggapan">Tanggapan*</label>
-<input type="text" name="tanggapan" id="tanggapan" required />
+<input type="text" name="tanggapan" id="tanggapan" required class="form-control" />
 </div>
 <input type="submit" value="Tanggapi" class="btn btn-success" name="btn" />
 </form>

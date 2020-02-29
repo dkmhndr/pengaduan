@@ -19,7 +19,7 @@ class Bidang extends CI_Controller{
 
     public function add(){
         $data['title'] = 'Administrasi Pengaduan Masyarakat';
-        $data['user'] = $this->db->get_where('petugas', ['username' => $this->session->userdata('email')])->row_array();
+        $data['user'] = $this->db->get_where('petugas', ['username' => $this->session->userdata('username')])->row_array();
         $bidang = $this->bidang_crud;
         $validation = $this->form_validation;
         $validation->set_rules($bidang->rules());
@@ -36,7 +36,7 @@ class Bidang extends CI_Controller{
 
     public function edit($id = null){
         $data['title'] = 'Administrasi Pengaduan Masyarakat';
-        $data['user'] = $this->db->get_where('petugas', ['username' => $this->session->userdata('email')])->row_array();
+        $data['user'] = $this->db->get_where('petugas', ['username' => $this->session->userdata('username')])->row_array();
         if(!isset($id)) redirect('bidang');
     
         $bidang = $this->bidang_crud;

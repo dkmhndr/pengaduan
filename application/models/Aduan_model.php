@@ -11,7 +11,7 @@ class Aduan_model extends CI_Model{
     public $foto;
     public $status;
 
-    public function rules(){
+        public function rules(){
         return[
             
             ['field' => 'id_bidang',
@@ -48,6 +48,16 @@ class Aduan_model extends CI_Model{
         $this->db->where(array('pengaduan.id_bidang'=>$id_bidang));
         return $this->db->get()->result();
    }
+
+   public function getByNik($nik){
+        $this->db->select('*');
+        $this->db->from('pengaduan');
+        $this->db->join('bidang','bidang.id_bidang = pengaduan.id_bidang');
+        $this->db->join('masyarakat','masyarakat.nik = pengaduan.nik');
+        $this->db->where(array('masyarakat.nik'=>$nik));
+        return $this->db->get()->result();
+   }
+   
    public function getAll(){
         $this->db->select('*');
         $this->db->from('pengaduan');
@@ -61,7 +71,6 @@ class Aduan_model extends CI_Model{
        $this->id_bidang = $post["id_bidang"];
        $this->tgl_pengaduan = $post["tgl_pengaduan"];
        $this->nik = $post["nik"];
-       $this->isi_laporan = $post["isi_laporan"];
        $this->isi_laporan = $post["isi_laporan"];
        $this->foto = $post["foto"];
        $this->status = "Menunggu Tanggapan";

@@ -9,6 +9,15 @@ class Tanggapan_model extends CI_Model{
     public $tgl_tanggapan;
     public $id_petugas;
 
+    public function getByAduan($id){
+        $this->db->select('*');
+        $this->db->from('tanggapan');
+        $this->db->join('pengaduan','pengaduan.id_pengaduan = tanggapan.id_pengaduan');
+        $this->db->join('bidang','pengaduan.id_bidang = bidang.id_bidang');
+        $this->db->join('petugas','petugas.id_petugas = tanggapan.id_petugas');
+        $this->db->where(array('tanggapan.id_pengaduan'=>$id));
+        return $this->db->get()->result();
+    }
     public function rules(){
         return[
             

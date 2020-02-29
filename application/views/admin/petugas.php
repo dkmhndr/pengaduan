@@ -25,9 +25,13 @@
 <td><?= $daftar->telp; ?></td>
 <td><?= $daftar->level; ?></td>
 <td>
+<?php if($daftar->id_petugas == $user["id_petugas"]){
+    echo "-";}else{
+    ?>
 <a href="<?= site_url('petugascrud/update/'.$daftar->id_petugas)?>" class="btn btn-info "><i class="fas fa-edit"></i></a>
 <a onclick="deleteConfirm('<?= site_url('petugascrud/delete/'.$daftar->id_petugas)?>')" class="btn btn-danger " href="#!"><i class="fas fa-trash"></i></a>
 </td>
+    <?php }?>
 </tr>
 <?php endforeach; ?>
 </tbody>

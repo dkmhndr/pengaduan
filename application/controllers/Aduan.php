@@ -10,28 +10,41 @@ class Aduan extends CI_Controller{
         $this->load->library('form_validation');
     }
 
-    public function index($id_bidang = null){
-        $data['title'] = 'Halaman Admin';
+    public function index(){
+        $data['title'] = 'Kelola Pengaduan';
         $data['user'] = $this->db->get_where('petugas',['username' => $this->session->userdata('username')])->row_array();
+        $data['masyarakat'] = $this->db->get_where('masyarakat',['username' => $this->session->userdata('username')])->row_array();
         $petugas = $data['user'];
+        $masyarakat = $data['masyarakat'];
         $id_bidang = $petugas['id_bidang'];
+        $nik = $masyarakat['nik'];
+        $data['nik'] = $nik;
         
         if($petugas['level']=='admin'){
-        $data['aduan'] = $this->aduan_model->getAll();        
+                $data['aduan'] = $this->aduan_model->getAll();        
+                $data['user'] = $petugas;
                 $this->load->view('admin/header',$data);
                 $this->load->view('admin/pengaduan',$data);
                 $this->load->view('admin/footer',$data);
-            }else{
+            }elseif($petugas['level']=='petugas'){
                 $data['aduan'] = $this->aduan_model->getByBidang($id_bidang);
+                $data['user'] = $petugas;
                 $this->load->view('petugas/header',$data);
                 $this->load->view('admin/pengaduan',$data);
-                $this->load->view('petugas/footer',$data);
+                $this->load->view('admin/footer',$data);
+        }else{
+            $data['aduan'] = $this->aduan_model->getByNik($nik);
+            $data['user'] = $masyarakat;
+                $this->load->view('masyarakat/header',$data);
+                $this->load->view('admin/pengaduan',$data);
+                $this->load->view('admin/footer',$data);
         }
     }
 
-    public function add(){
-        $data['title'] = 'Pengaduan Masyarakat';
+        public function add(){
+        $data['title'] = 'Buat Aduan';
         $data['user'] = $this->db->get_where('masyarakat', ['username' => $this->session->userdata('username')])->row_array();
+        $data['bidang'] = $this->bidang_crud->getAll();
         $aduan = $this->aduan_model;
         $validation = $this->form_validation;
         $validation->set_rules($aduan->rules());
@@ -42,35 +55,8 @@ class Aduan extends CI_Controller{
             }
             
             $this->load->view('masyarakat/header', $data);
-            $this->load->view('masyarakat/aduan', $data);
+            $this->load->view('masyarakat/aduanadd', $data);
             $this->load->view('masyarakat/footer', $data);        
-    }
-
-    public function tanggapi($id = null){
-        $data['title'] = 'Administrasi Pengaduan Masyarakat';
-        $data['user'] = $this->db->get_where('petugas', ['username' => $this->session->userdata('username')])->row_array();
-        $data['id_pengaduan'] = $id;
-        if(!isset($id)) redirect('aduan');
-    
-        $aduan = $this->tanggapan_model;
-        $validation = $this->form_validation;
-        $validation->set_rules($aduan->rules());
-
-        if($validation->run()){
-            $aduan->ditanggapi();
-            $this->session->set_flashdata('success', 'Berhasil ditanggapi!');
-        }
-
-        $this->load->view('admin/header', $data);
-        $this->load->view('admin/tanggapi', $data);
-        $this->load->view('admin/footer', $data);        
-    }
-
-    public function hoax($id=null){
-        if(!isset($id)) show_404();
-        if($this->tanggapan_model->hoax($id)){
-            redirect('aduan');
-        }
     }
 }
 ?>

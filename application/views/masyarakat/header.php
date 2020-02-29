@@ -38,7 +38,7 @@
 
       <!-- Nav Item - Dasbor -->
       <li class="nav-item active">
-        <a class="nav-link" href="index.php">
+        <a class="nav-link" href="<?= base_url('masyarakat');?>">
           <i class="fas fa-fw fa-tachometer-alt"></i>
           <span>Dasbor</span></a>
       </li>
@@ -53,36 +53,15 @@
 
       <!-- Nav Item - Tables -->
       <li class="nav-item">
-        <a class="nav-link" href="tables.html">
-          <i class="fas fa-fw fa-table"></i>
-          <span>Buat Aduan</span></a>
-      </li>
-
-      <!-- Nav Item - Tables -->
-      <li class="nav-item">
-        <a class="nav-link" href="tables.html">
-          <i class="fas fa-fw fa-table"></i>
-          <span>Tanggapan</span></a>
-      </li>
-
-      <!-- Nav Item - Tables -->
-      <li class="nav-item">
-        <a class="nav-link" href="tables.html">
-          <i class="fas fa-fw fa-table"></i>
+        <a class="nav-link" href="<?= site_url('aduan')?>">
+          <i class="fas fa-fw fa-file-alt"></i>
           <span>Kelola Aduan</span></a>
       </li>
 
       <!-- Nav Item - Tables -->
       <li class="nav-item">
-        <a class="nav-link" href="tables.html">
-          <i class="fas fa-fw fa-table"></i>
-          <span>Generate Laporan</span></a>
-      </li>
-
-      <!-- Nav Item - Tables -->
-      <li class="nav-item">
         <a class="nav-link" href="#" data-toggle="modal" data-target="#logoutModal">
-          <i class="fas fa-fw fa-table"></i>
+          <i class="fas fa-fw fa-sign-out-alt"></i>
           <span>Keluar</span></a>
       </li>
 
@@ -118,7 +97,7 @@
 
             <!-- Nav Item - User Information -->
             <li class="nav-item dropdown no-arrow">
-                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Selamat Datang, <?= $user['nama_petugas']; ?></span>
+                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Selamat Datang, <?= $user['nama']; ?></span>
                 <img class="img-profile rounded-circle" src="https://source.unsplash.com/QAB-WJcbgJk/60x60">
             </li>
 

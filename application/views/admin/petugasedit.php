@@ -12,7 +12,7 @@
 <form action="<?php base_url('petugascrud/update'); ?>" method="post" enctype="multipart/form-data">
 <input type="hidden" name="id" id="id" value=<?= $value->id_petugas ?> >
 <div class="form-group">
-    <label for="id_bidang">Nama Bidang (Pilih ADMIN bila mengubah ke akun Admin)</label>
+    <label for="id_bidang">Nama Bidang</label>
     <select class="form-control <?= form_error('id_bidang')?'is-invalid':''?>" name="id_bidang" id="id_bidang" placeholder="Nama Bidang">
         <?php foreach($bidang as $opt): ?>
             <option value="<?php echo $opt->id_bidang ?>"><?php echo $opt->nama_bidang ?></option>
