@@ -81,7 +81,16 @@
       </div>
     </div>
   </div>
-
+  
+<script>
+function printContent(el){
+	var restorepage = document.body.innerHTML;
+	var printcontent = document.getElementById(el).innerHTML;
+	document.body.innerHTML = printcontent;
+	window.print();
+	document.body.innerHTML = restorepage;
+}
+</script>
   <!-- Bootstrap core JavaScript-->
   <script src="<?= base_url('assets/'); ?>vendor/jquery/jquery.min.js"></script>
   <script src="<?= base_url('assets/'); ?>vendor/bootstrap/js/bootstrap.bundle.min.js"></script>

@@ -74,9 +74,7 @@
 
       <!-- Nav Item - Tables -->
       <li class="nav-item">
-        <a class="nav-link" href="tables.html">
-          <i class="fas fa-fw fa-external-link-square-alt"></i>
-          <span>Generate Laporan</span></a>
+
       </li>
 
       <!-- Nav Item - Tables -->

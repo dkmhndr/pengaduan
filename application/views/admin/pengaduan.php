@@ -1,11 +1,15 @@
-<div><h3>Daftar Aduan</h3></div>
+<div ><h3>Daftar Aduan</h3></div>
 <div class="card mb-3">
 <?php if(isset($nik)){?>
 <div class="card-header">
 <a href="<?= site_url('aduan/add') ?>"><i class="fas fa-plus"></i>Buat Aduan</a>
 </div>
-<?php } ?>
-<div class="card-body">
+<?php }elseif($user["level"]=="admin"){ ?>
+    <div class="card-header">
+        <a onclick="printContent('div1')" href="#"><i class="fas fa-fw fa-external-link-square-alt"></i>Generate Laporan</a>
+    </div>
+<?php }?>
+<div class="card-body" id="div1">
 <div class="table-responsive">
 <table class="table table-hover" width="100%" cellspacing="0">
 <thead>

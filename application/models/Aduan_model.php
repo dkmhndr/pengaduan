@@ -57,13 +57,37 @@ class Aduan_model extends CI_Model{
         $this->db->where(array('masyarakat.nik'=>$nik));
         return $this->db->get()->result();
    }
-   
+
    public function getAll(){
         $this->db->select('*');
         $this->db->from('pengaduan');
         $this->db->join('bidang','bidang.id_bidang = pengaduan.id_bidang');
         $this->db->join('masyarakat','masyarakat.nik = masyarakat.nik');
         return $this->db->get()->result();
+   }
+
+   public function getDashboardAdmin(){
+       $jmllaporan = $this->db->count_all('pengaduan');
+       $ditanggapi = $this->db->select('*')->from('pengaduan')->where(array('status'=>'Ditanggapi'))->count_all_results();
+       $menunggu = $this->db->select('*')->from('pengaduan')->where(array('status'=>'Menunggu Tanggapan'))->count_all_results();
+       $hoax = $this->db->select('*')->from('pengaduan')->where(array('status'=>'Hoax'))->count_all_results();
+       return array('jmllaporan'=>$jmllaporan,'ditanggapi'=>$ditanggapi,'menunggu'=>$menunggu,'hoax'=>$hoax);
+   }
+
+   public function getDashboardPetugas($id_bidang){
+       $jmllaporan = $this->db->select('*')->from('pengaduan')->where(array('id_bidang'=>$id_bidang))->count_all_results();
+       $ditanggapi = $this->db->select('*')->from('pengaduan')->where(array('status'=>'Ditanggapi'))->where(array('id_bidang'=>$id_bidang))->count_all_results();
+       $menunggu = $this->db->select('*')->from('pengaduan')->where(array('status'=>'Menunggu Tanggapan'))->where(array('id_bidang'=>$id_bidang))->count_all_results();
+       $hoax = $this->db->select('*')->from('pengaduan')->where(array('status'=>'Hoax'))->where(array('id_bidang'=>$id_bidang))->count_all_results();
+       return array('jmllaporan'=>$jmllaporan,'ditanggapi'=>$ditanggapi,'menunggu'=>$menunggu,'hoax'=>$hoax);
+   }
+
+   public function getDashMasyarakat($nik){
+       $jmllaporan = $this->db->select('*')->from('pengaduan')->where(array('nik'=>$nik))->count_all_results();
+       $ditanggapi = $this->db->select('*')->from('pengaduan')->where(array('status'=>'Ditanggapi'))->where(array('nik'=>$nik))->count_all_results();
+       $menunggu = $this->db->select('*')->from('pengaduan')->where(array('status'=>'Menunggu Tanggapan'))->where(array('nik'=>$nik))->count_all_results();
+       $hoax = $this->db->select('*')->from('pengaduan')->where(array('status'=>'Hoax'))->where(array('nik'=>$nik))->count_all_results();
+       return array('jmllaporan'=>$jmllaporan,'ditanggapi'=>$ditanggapi,'menunggu'=>$menunggu,'hoax'=>$hoax);
    }
    
    public function save(){
