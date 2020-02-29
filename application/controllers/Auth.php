@@ -35,7 +35,8 @@ class auth extends CI_Controller{
                 $this->session->set_userdata($data);
                 redirect('masyarakat');
             }else {
-                $this->session->set_flashdata('message', 'Wrong Password!');
+                $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Wrong Password!</div>');
+                redirect('auth');
             }
         }elseif($petugas) {
             if(password_verify($password, $petugas['password'])){
@@ -52,11 +53,12 @@ class auth extends CI_Controller{
                         $this->session->set_userdata($data);
                         redirect('petugas');
                     }
-            }else {
-                $this->session->set_flashdata('message', 'Wrong Password!');
+            }else{
+                $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Wrong Password!</div>');
+                redirect('auth');
             }
         }else {
-            $this->session->set_flashdata('message', 'Username is not registered!');
+            $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Username is not registered!</div>');
             redirect('auth');
         }
     }
@@ -125,7 +127,7 @@ class auth extends CI_Controller{
     public function logout(){
         $this->session->unset_userdata('username');
         $this->session->unset_userdata('akses');
-        $this->session->set_flashdata('message', 'You has been logged out');
+        $this->session->set_flashdata('message', '<div class="alert alert-primary" role="alert">You has been logged out.</div>');
         redirect('auth');
     }
 }
