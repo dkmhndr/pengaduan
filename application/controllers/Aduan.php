@@ -32,7 +32,7 @@ class Aduan extends CI_Controller{
                 $this->load->view('petugas/header',$data);
                 $this->load->view('admin/pengaduan',$data);
                 $this->load->view('admin/footer',$data);
-        }else{
+        }elseif($masyarakat){
             $data['aduan'] = $this->aduan_model->getByNik($nik);
             $data['user'] = $masyarakat;
                 $this->load->view('masyarakat/header',$data);
