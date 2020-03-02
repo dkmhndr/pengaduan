@@ -40,7 +40,7 @@ class Aduan_model extends CI_Model{
         $this->db->select('*');
         $this->db->from('pengaduan');
         $this->db->join('bidang','bidang.id_bidang = pengaduan.id_bidang');
-        $this->db->join('masyarakat','masyarakat.nik = masyarakat.nik');
+        $this->db->join('masyarakat','masyarakat.nik = pengaduan.nik');
         $this->db->where(array('pengaduan.id_bidang'=>$id_bidang));
         return $this->db->get()->result();
    }
