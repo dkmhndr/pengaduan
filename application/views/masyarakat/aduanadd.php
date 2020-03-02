@@ -25,7 +25,7 @@
 				<input type="textbox" name="isi_laporan" id="isi_laporan" required class="form-control" />
 			</div>
 			<div class="form-group">
-				<label for="foto">Foto</label>
+				<label for="foto">Foto (Max 2 MB)</label>
 				<input class="form-control-file" type="file"
 					name="foto" />
 				<div class="invalid-feedback">

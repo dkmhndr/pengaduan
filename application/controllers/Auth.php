@@ -88,38 +88,7 @@ class auth extends CI_Controller{
                 'telp' => htmlspecialchars($this->input->post('telp'), true)
             ];
             $this->db->insert('masyarakat',$data);
-            $this->session->set_flashdata('message','Registration Success');
-            redirect('auth');
-        }
-    }
-
-    public function registrationpetugas(){
-        $this->form_validation->set_rules('id_bidang', 'Bidang', 'trim|required'); 
-        $this->form_validation->set_rules('nama_petugas', 'Nama Petugas', 'trim|required'); 
-        $this->form_validation->set_rules('username', 'Username', 'trim|required|is_unique[masyarakat.username]',['is_unique' => 'This username has already registered']);
-        $this->form_validation->set_rules('password1', 'Password', 'trim|required|min_length[3]|matches[password2]',[
-            'matches' => 'Password doesnt match',
-            'min_length' => 'Password too short!'
-        ]);   
-        $this->form_validation->set_rules('password2', 'Password', 'trim|required|matches[password1]');
-        $this->form_validation->set_rules('telp', 'Telp', 'trim|required');
-        $this->form_validation->set_rules('level', 'Level', 'trim|required');
-        
-        if($this->form_validationn->run() == false){
-            $data['title'] = 'Register';   
-            $this->load->view('auth/registrationpetugas');
-        }else{
-            $data = [
-                'id_petugas' => '',
-                'id_bidang' => htmlspecialchars($this->input->post('id_bidang', true)),
-                'nama_petugas' => htmlspecialchars($this->input->post('nama_petugas', true)),
-                'username' => htmlspecialchars($this->input->post('username', true)),
-                'password' => password_hash($this->input->post('password1'), PASSWORD_DEFAULT),
-                'telp' => password_hash($this->input->post('telp'), PASSWORD_DEFAULT),
-                'level' => password_hash($this->input->post('level'), PASSWORD_DEFAULT)
-            ];
-            $this->db->insert('petugas',$data);
-            $this->session->set_flashdata('message','Registration Success');
+            $this->session->set_flashdata('message','<div class="alert alert-success" role="alert">Registration Success!</div>');
             redirect('auth');
         }
     }

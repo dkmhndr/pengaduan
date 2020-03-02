@@ -4,7 +4,6 @@ class Aduan_model extends CI_Model{
     private $pengaduan = "pengaduan";
     private $tabletanggapan = "tanggapan";
 
-    public $id_pengaduan;
     public $id_bidang;
     public $tgl_pengaduan;
     public $nik;
@@ -89,7 +88,6 @@ class Aduan_model extends CI_Model{
    
    public function save(){
        $post = $this->input->post();
-       $this->id_pengaduan ="";
        $this->id_bidang = $post["id_bidang"];
        $this->tgl_pengaduan = $post["tgl_pengaduan"];
        $this->nik = $post["nik"];
@@ -102,9 +100,9 @@ class Aduan_model extends CI_Model{
     private function _uploadImage(){
     $config['upload_path'] = './upload/pengaduan/';
     $config['allowed_types'] = 'gif|jpg|png';
-    $config['file_name'] = $this->id_pengaduan;
+    $config['file_name'] = uniqid();
     $config['overwrite'] = true;
-    $config['max_size'] = 4096; // 1MB
+    // $config['max_size'] = 4096; // 1MB
     // $config['max_width'] = 1024;
     // $config['max_height'] = 768;
 

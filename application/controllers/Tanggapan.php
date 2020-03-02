@@ -24,6 +24,7 @@ class Tanggapan extends CI_Controller{
     public function tanggapi($id = null){
         $data['title'] = 'Administrasi Pengaduan Masyarakat';
         $data['user'] = $this->db->get_where('petugas', ['username' => $this->session->userdata('username')])->row_array();
+        $petugas = $data['user'];
         $data['id_pengaduan'] = $id;
         if(!isset($id)) redirect('aduan');
     
@@ -35,10 +36,15 @@ class Tanggapan extends CI_Controller{
             $tanggapan->ditanggapi();
             $this->session->set_flashdata('success', 'Berhasil ditanggapi!');
         }
-
+        if($petugas['level']=='admin'){
         $this->load->view('admin/header', $data);
         $this->load->view('admin/tanggapi', $data);
-        $this->load->view('admin/footer', $data);        
+        $this->load->view('admin/footer', $data); 
+        }else{
+        $this->load->view('petugas/header', $data);
+        $this->load->view('admin/tanggapi', $data);
+        $this->load->view('petugas/footer', $data); 
+        }       
     }
 
     public function hoax($id=null){
